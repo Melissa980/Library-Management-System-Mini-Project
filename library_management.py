@@ -1,6 +1,3 @@
-from book import Book
-from user import User
-from author import Author
 
 class LibraryManagementSystem:
     def __init__(self):
@@ -20,9 +17,9 @@ class LibraryManagementSystem:
             if choice == "1":
                 self.book_operations()
             elif choice == "2":
-                self.user_operations()
+                self.user_operations()  
             elif choice == "3":
-                self.author_operations()
+                self.author_operations()  
             elif choice == "4":
                 print("Exiting system.")
                 break
@@ -75,14 +72,59 @@ class LibraryManagementSystem:
             print("Invalid option.")
 
     def user_operations(self):
-        # Similar to book_operations, handle user-related tasks here
-        pass
+        print("\nUser Operations:")
+        print("1. Add a new user")
+        print("2. View user details")
+        print("3. Display all users")
+        choice = input("Select an option: ")
+
+        if choice == "1":
+            name = input("Enter user name: ")
+            library_id = input("Enter user library ID: ")
+            new_user = User(name, library_id)
+            self.users.append(new_user)
+            print("User added successfully.")
+        elif choice == "2":
+            library_id = input("Enter the user library ID: ")
+            for user in self.users:
+                if user._User__library_id == library_id:  
+                    user.display_info()
+                    return
+            print("User not found.")
+        elif choice == "3":
+            if not self.users:
+                print("No users found.")
+            else:
+                for user in self.users:
+                    user.display_info()
+        else:
+            print("Invalid option.")
 
     def author_operations(self):
-        # Similar to book_operations, handle author-related tasks here
-        pass
+        print("\nAuthor Operations:")
+        print("1. Add a new author")
+        print("2. View author details")
+        print("3. Display all authors")
+        choice = input("Select an option: ")
 
-# Run the application
-if __name__ == "__main__":
-    library_system = LibraryManagementSystem()
-    library_system.main_menu() 
+        if choice == "1":
+            name = input("Enter author name: ")
+            biography = input("Enter author biography: ")
+            new_author = Author(name, biography)
+            self.authors.append(new_author)
+            print("Author added successfully.")
+        elif choice == "2":
+            name = input("Enter the author name: ")
+            for author in self.authors:
+                if author._Author__name == name:  
+                    author.display_info()
+                    return
+            print("Author not found.")
+        elif choice == "3":
+            if not self.authors:
+                print("No authors found.")
+            else:
+                for author in self.authors:
+                    author.display_info()
+        else:
+            print("Invalid option.")
